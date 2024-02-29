@@ -1,11 +1,48 @@
-# React + TypeScript + Vite
+# Articles Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Frontend of the articles project developed with React + Vite.
 
-Currently, two official plugins are available:
+### To Do:
+- [X] Authentication
+- [ ] Theme
+  - [ ] Tailwind?
+- [ ] Components
+  - [ ] Login
+    - [X] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+  - [ ] Logout Button
+    - [X] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+  - [X] Articles list
+    - [X] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+  - [X] Create Article Button
+    - [X] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+  - [X] Create Article
+    - [x] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+  - [ ] Read Article
+    - [ ] Blueprint
+    - [ ] Routing
+    - [ ] Logic
+    - [ ] Styles
+- [ ] Improve project structure
+- [ ] Improve authentication
+- [ ] Use rich text editor for articles content?
+  - [ ] Draft.js
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Expanding the ESLint configuration
 
