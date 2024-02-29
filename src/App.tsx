@@ -5,6 +5,7 @@ import AddArticleButton from './components/AddArticleButton'
 import Login from './components/Login'
 import { AuthContext } from './context/Auth.context'
 import { Auth } from './models/Auth.model'
+import LogoutButton from './components/Logout'
 
 function App() {
   const { user } = useContext<Auth>(AuthContext);
@@ -14,6 +15,7 @@ function App() {
       {user ? (
       <div>
         <AddArticleButton/>
+        <LogoutButton/>
         <Suspense fallback={<Loading />}>
           <Articles/>
         </Suspense>

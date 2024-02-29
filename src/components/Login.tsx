@@ -1,16 +1,21 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/Auth.context';
+import axios from 'axios';
 
 const Login = () => {
   const auth = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (authentication logic)
-    auth?.login({ username, payload: {} })
-    console.log('Submitted:', { username, password });
+    
+    try {
+    const { data } = await axios.post(`http://localhost:3000/auth/login`, { username, password });
+    auth?.login({ username, token: data.access_token  })
+    } catch(ex) {
+      console.log('ex:', ex);
+    }
   };
 
   return (

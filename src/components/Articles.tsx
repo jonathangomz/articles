@@ -6,9 +6,7 @@ import { AuthContext } from '../context/Auth.context'
 
 function Articles() {
   const [articles, setArticles] = useState<ArticleType[]>([])
-  const user = useContext(AuthContext)
-
-  console.log(user)
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     fetchArticles();
@@ -19,6 +17,7 @@ function Articles() {
       const {data} = await axios.get('http://localhost:3000/articles/jonathangomz',{
         headers: {
           Accept: 'application/json',
+          Authorization: `Bearer ${user?.token}`
         },
       }); // Replace with your API endpoint
       console.log('data', data);

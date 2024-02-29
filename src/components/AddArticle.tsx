@@ -16,11 +16,11 @@ function AddArticle() {
   const createArticles = async () => {
     try {
       setLoading(true);
-      console.log('articleData', articleData);
+      const { status } = await axios.post(`http://localhost:3000/articles/${user?.username}`, articleData, {headers: {Authorization: `Bearer ${user?.token}`}}); 
 
-      const { data } = await axios.post(`http://localhost:3000/articles/${user?.username}`, articleData); // Replace with your API endpoint
-      
-      console.log('data', data);
+      if(status === 201) {
+        // Everything is ok
+      }
     } catch (error) {
       console.error('Error creating the article:', error);
     } finally {
@@ -36,7 +36,7 @@ function AddArticle() {
       <input type='text' placeholder='Content' value={articleData.content} onChange={(event) => setArticleData({...articleData, content: event.currentTarget.value})}></input>
 
       <div onClick={createArticles}>
-        <p>Create</p>
+        {loading ? (<p>Loading...</p>) : (<p>Create</p>)}
       </div>
 
       <Link to='/'>Back</Link>
