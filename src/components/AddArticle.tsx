@@ -1,11 +1,12 @@
 import '../models/Article'
-import { useState, useEffect } from 'react'
-import { ArticleType } from '../models/Article'
+import { useState, useContext } from 'react'
 import axios from 'axios'
 import { CreateArticle } from '../models/CreateArticle.model';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/Auth.context';
 
 function AddArticle() {
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [articleData, setArticleData] = useState<CreateArticle>({
     title: '',
@@ -17,7 +18,7 @@ function AddArticle() {
       setLoading(true);
       console.log('articleData', articleData);
 
-      const { data } = await axios.post('http://localhost:3000/articles/jonathangomz', articleData); // Replace with your API endpoint
+      const { data } = await axios.post(`http://localhost:3000/articles/${user?.username}`, articleData); // Replace with your API endpoint
       
       console.log('data', data);
     } catch (error) {

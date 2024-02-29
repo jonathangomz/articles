@@ -1,11 +1,14 @@
 import '../models/Article'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { ArticleType } from '../models/Article'
 import axios from 'axios'
+import { AuthContext } from '../context/Auth.context'
 
 function Articles() {
-  
   const [articles, setArticles] = useState<ArticleType[]>([])
+  const user = useContext(AuthContext)
+
+  console.log(user)
 
   useEffect(() => {
     fetchArticles();
