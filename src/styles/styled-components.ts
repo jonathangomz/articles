@@ -79,7 +79,8 @@ export const LinkButton = styled(Link)<{type?: 'danger'}>`
 export const TextArea = styled.textarea`
   border: 1px solid #ffffff21;
   border-radius: 8px;
-  height: 2em;
   height: 500px;
   width: 100%;
+  padding: 5px;
+  box-sizing:border-box;
 `
