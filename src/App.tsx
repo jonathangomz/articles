@@ -11,16 +11,16 @@ function App() {
   const { user } = useContext<Auth>(AuthContext);
 
   return (
-    <div>
+    <>
       {user ? (
-      <div>
-        <AddArticleButton/>
-        <LogoutButton/>
-        <Suspense fallback={<Loading />}>
-          <Articles/>
-        </Suspense>
-      </div>) : (<Login/>)}
-    </div>
+        <div>
+          <AddArticleButton/>
+          <LogoutButton/>
+          <Suspense fallback={<Loading />}>
+            <Articles/>
+          </Suspense>
+        </div>) : (<Login/>)}
+    </>
   )
 }
 
