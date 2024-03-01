@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/Auth.context';
 import styled, { keyframes } from "styled-components"
-import axios from 'axios';
+import { instance as axios } from '../services/AxiosErrorHandler';
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     
     try {
-    const { data } = await axios.post(`http://localhost:3000/auth/login`, { username, password });
+    const { data } = await axios.post(`/auth/login`, { username, password });
     auth?.login({ username, token: data.access_token  })
     } catch(ex) {
       console.log('ex:', ex);
@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   return (
-    <Container>
+    <CenterContainer>
       <h2>Login</h2>
       <Form onSubmit={handleSubmit}>
         <FormItem>
@@ -43,26 +43,15 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormItem>
-        <FormButton isLoading={isLoading} disabled={isLoading} type="submit">
-          {isLoading ? (
-          <Spinner
-            width="24px"
-            height="24px"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <Circle fill="none" strokeWidth="3" strokeLinecap="round" cx="12" cy="12" r="10"></Circle>
-          </Spinner>
-        ) : (
-          'Login'
-        )}
+        <FormButton is_loading={isLoading} disabled={isLoading} type="submit">
+          {isLoading ? (<Spinner />) : ('Login')}
         </FormButton>
       </Form>
-    </Container>
+    </CenterContainer>
   );
 };
 
-const Container = styled.div`
+const CenterContainer = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -95,12 +84,12 @@ const FormInput = styled.input`
   height: 2em;
 `
 
-const FormButton = styled.button<{ isLoading: boolean }>`
+const FormButton = styled.button<{ is_loading: boolean }>`
   border: 1px solid #ffffff21;
   margin-top: 10px;
   width: 100%;
   &:hover {
-    cursor: ${({ isLoading }) => isLoading ? 'wait' : 'pointer'};
+    cursor: ${({ is_loading }) => is_loading ? 'wait' : 'pointer'};
   }
 `
 
