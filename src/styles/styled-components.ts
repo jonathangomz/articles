@@ -31,6 +31,7 @@ export const FormInput = styled.input`
   border: 1px solid #ffffff21;
   border-radius: 8px;
   height: 2em;
+  padding: 5px;
 `
 
 export const FormButton = styled.button<{ is_loading: boolean }>`
