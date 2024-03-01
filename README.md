@@ -12,7 +12,7 @@ Frontend of the articles project developed with React + Vite.
     - [X] Blueprint
     - [ ] Routing
     - [ ] Logic
-    - [ ] Styles
+    - [X] Styles
   - [ ] Logout Button
     - [X] Blueprint
     - [ ] Routing
