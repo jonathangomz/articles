@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const ModalWrapper = styled.div`
