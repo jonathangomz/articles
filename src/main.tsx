@@ -8,6 +8,7 @@ import {
 import AddArticle from './components/AddArticle';
 import Login from './components/Login.tsx';
 import { AuthProvider } from './context/Auth.context.tsx';
+import Article from './components/Article.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
-    path: "createArticle",
+    path: "article",
     element: <AddArticle/>,
+  },
+  {
+    path: "article/:authorId/:articleId",
+    element: <Article/>,
   },
 ]);
 

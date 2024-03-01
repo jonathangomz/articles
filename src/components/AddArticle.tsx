@@ -1,47 +1,73 @@
 import '../models/Article'
 import { useState, useContext } from 'react'
-import axios from 'axios'
-import { CreateArticle } from '../models/CreateArticle.model';
-import { Link } from 'react-router-dom';
+import { instance as axios } from '../services/AxiosErrorHandler'
 import { AuthContext } from '../context/Auth.context';
+import { CenterContainer, Form, FormButton, FormInput, FormItem, TextArea } from '../styles/styled-components';
+import Spinner from './Spinner';
+import Navbar from './Navbar';
 
 function AddArticle() {
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  const [articleData, setArticleData] = useState<CreateArticle>({
-    title: '',
-    content: ''
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-  const createArticles = async () => {
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    
     try {
-      setLoading(true);
-      const { status } = await axios.post(`http://localhost:3000/articles/${user?.username}`, articleData, {headers: {Authorization: `Bearer ${user?.token}`}}); 
+      const { status } = await axios.post(`/articles/${user?.username}`, { title, content }, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`
+        }
+      }); 
 
       if(status === 201) {
         // Everything is ok
       }
-    } catch (error) {
-      console.error('Error creating the article:', error);
+    } catch(ex) {
+      throw ex;
     } finally {
-      setLoading(true);
+      setIsLoading(false);
     }
   };
 
+
+  const validateFields = () => (title.length === 0 && content.length === 0)
+
   return (
-    <div>
-      <p>Create a new Article</p>
+    <>
+      <Navbar
+        title='Create a new Article'
+        buttonLink='/'
+        buttonText='Back'
+      />
 
-      <input type='text' placeholder='Title' value={articleData.title} onChange={(event) => setArticleData({...articleData, title: event.currentTarget.value})}></input>
-      <input type='text' placeholder='Content' value={articleData.content} onChange={(event) => setArticleData({...articleData, content: event.currentTarget.value})}></input>
+      <CenterContainer>
+        <Form max_width='initial' onSubmit={handleSubmit}>
+          <FormItem>
+            <label>Title</label>
+            <FormInput
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </FormItem>
 
-      <div onClick={createArticles}>
-        {loading ? (<p>Loading...</p>) : (<p>Create</p>)}
-      </div>
+          <TextArea
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
 
-      <Link to='/'>Back</Link>
-
-    </div>
+          <FormButton is_loading={isLoading} disabled={isLoading || validateFields()} type="submit">
+            {isLoading ? (<Spinner />) : ('Create')}
+          </FormButton>
+        </Form>
+      </CenterContainer>
+    </>
   );
 }
 
