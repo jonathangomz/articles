@@ -42,8 +42,10 @@ function Articles() {
         {articles.map((article: ArticleModel) => (
           <ArticleContainer key={article.id} to={`article/${article.author}/${article.id}`}>
             <ArticleTitle>{article.title}</ArticleTitle>
-            <ArticleAuthor>Author: {article.author}</ArticleAuthor>
-            <ArticleDate>Date: {article.date}</ArticleDate>
+            <ArticleMetadata>
+              <ArticleAuthor>By: {article.author}</ArticleAuthor>
+              <ArticleDate>{article.date}</ArticleDate>
+            </ArticleMetadata>
             <ArticleContent>{article.content.substring(0, 70)}{article.content.length > 70 ? '...':''}</ArticleContent>
           </ArticleContainer>
         ))}
@@ -57,6 +59,8 @@ const ArticlesList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: 10px 10px;
+  margin-top: 75px;
 `;
 
 const ArticleContainer = styled(Link)`
@@ -69,17 +73,25 @@ const ArticleContainer = styled(Link)`
 const ArticleTitle = styled.h2`
   color: #333;
   font-size: 1.5rem;
+  margin: 0;
   margin-bottom: 8px;
+`;
+
+const ArticleMetadata = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const ArticleAuthor = styled.p`
   color: #666;
   font-size: 1rem;
+  margin: 0;
 `;
 
 const ArticleDate = styled.p`
   color: #666;
   font-size: 0.9rem;
+  margin: 0;
 `;
 
 const ArticleContent = styled.p`
