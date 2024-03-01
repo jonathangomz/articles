@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Articles from './components/Articles'
+import ArticlesList from './components/ArticlesList'
 import Login from './components/Login'
 import { AuthContext } from './context/Auth.context'
 import { Auth } from './models/Auth.model'
@@ -12,7 +12,7 @@ function App() {
     <>
       {user ? (
         <AxiosErrorHandler>
-          <Articles/>
+          <ArticlesList/>
         </AxiosErrorHandler>
       ) : (<Login/>)}
     </>

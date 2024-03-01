@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import { FormInput } from '../styles/styled-components'
 
-function Articles() {
+export default function ArticlesList() {
   const { user } = useContext(AuthContext);
   
   const [articles, setArticles] = useState<ArticleModel[]>([]);
@@ -46,7 +46,7 @@ function Articles() {
         buttonText='Create a new Article'
       />
 
-      <ArticlesList>
+      <Container>
         <SearchSection>
           <SearchText
             type='text'
@@ -74,7 +74,7 @@ function Articles() {
             <ArticleContent>{article.content.substring(0, 70)}{article.content.length > 70 ? '...':''}</ArticleContent>
           </ArticleContainer>
         ))}
-      </ArticlesList>
+      </Container>
     </>
   );
 }
@@ -95,7 +95,7 @@ const SearchText = styled(FormInput)`
   width: 100%;
 `
 
-const ArticlesList = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -139,5 +139,3 @@ const ArticleContent = styled.p`
   font-size: 1rem;
   margin-top: 16px;
 `;
-
-export default Articles
