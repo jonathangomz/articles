@@ -6,25 +6,33 @@ import { AuthContext } from '../context/Auth.context'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
+import { FormInput } from '../styles/styled-components'
 
 function Articles() {
-  const [articles, setArticles] = useState<ArticleModel[]>([])
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
+  
+  const [articles, setArticles] = useState<ArticleModel[]>([]);
+  const [searchType, setSearchType] = useState('title');
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [searchText]);
 
   const fetchArticles = async () => {
     try {
-      const {data} = await axios.get('/articles',{
+      // If have filter generate the query param
+      let query: string | undefined;
+      if(searchText) query = `?${searchType}=${searchText}`;
+
+      const {data} = await axios.get(`/articles${(query ?? '')}`,{
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${user?.token}`
         },
       });
-      setArticles(data);
 
+      setArticles(data);
     } catch (error) {
       console.error('Error fetching articles:', error);
     }
@@ -33,12 +41,29 @@ function Articles() {
   return (
     <>
       <Navbar
-              title='Articles'
-              buttonLink='/article'
-              buttonText='Create a new Article'
-            />
+        title='Articles'
+        buttonLink='/article'
+        buttonText='Create a new Article'
+      />
 
       <ArticlesList>
+        <SearchSection>
+          <SearchText
+            type='text'
+            placeholder='Search by title, author or content'
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+
+          <SelectSearchType
+            onChange={(e) => setSearchType(e.target.value)}
+          >
+            <option selected={searchType === 'author'} value="author">Author</option>
+            <option selected={searchType === 'title'} value="title">Title</option>
+            <option selected={searchType === 'content'} value="content">Content</option>
+          </SelectSearchType>
+        </SearchSection>
+
         {articles.map((article: ArticleModel) => (
           <ArticleContainer key={article.id} to={`article/${article.author}/${article.id}`}>
             <ArticleTitle>{article.title}</ArticleTitle>
@@ -54,6 +79,21 @@ function Articles() {
   );
 }
 
+const SearchSection = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
+`
+
+const SelectSearchType = styled.select`
+  border: 1px solid #ffffff21;
+  border-radius: 8px;
+  padding: 5px;
+`
+
+const SearchText = styled(FormInput)`
+  width: 100%;
+`
 
 const ArticlesList = styled.div`
   display: flex;
