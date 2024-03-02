@@ -1,9 +1,9 @@
 import { FormEvent, useContext, useState } from 'react';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Auth.context';
 import { instance as axios } from '../services/AxiosErrorHandler';
 import Spinner from './Spinner';
-import { CenterContainer, FormButton, FormInput, FormItem } from '../styles/styled-components';
+import { Form, CenterContainer, FormButton, FormInput, FormItem } from '../styles/styled-components';
 
 export default function Login() {
   const auth = useContext(AuthContext);
