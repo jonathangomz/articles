@@ -5,63 +5,45 @@ Frontend of the articles project developed with React + Vite.
 
 ### To Do:
 - [X] Authentication
-- [ ] Theme
-  - [ ] Tailwind?
-- [ ] Components
-  - [ ] Login
-    - [X] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [X] Styles
-  - [ ] Logout Button
-    - [X] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [ ] Styles
+- [X] Theme
+  - [X] Styled components
+  - [ ] ~~Tailwind?~~
+- [X] Components
+  - [X] Login
   - [X] Articles list
-    - [X] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [ ] Styles
-  - [X] Create Article Button
-    - [X] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [ ] Styles
   - [X] Create Article
-    - [x] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [ ] Styles
-  - [ ] Read Article
-    - [ ] Blueprint
-    - [ ] Routing
-    - [ ] Logic
-    - [ ] Styles
-- [ ] Improve project structure
-- [ ] Improve authentication
-- [ ] Use rich text editor for articles content?
-  - [ ] Draft.js
+  - [X] Read Article
+  - [X] Navbar
+    - [X] ~~Create Article Button~~
+    - [X] Customizable button
+    - [X] Logout Button
+  - [X] Sign Up
+- [X] Improve project structure
+- [X] Improve authentication
+- [ ] ~~Use rich text editor for articles content?~~
+  - [ ] ~~Draft.js~~
 
 
-## Expanding the ESLint configuration
+## Run the project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This project depends on a Nestjs project running on the `3000` port for the backend services. You can find the [backend project here](https://github.com/jonathangomz/articles-api).
 
-- Configure the top-level `parserOptions` property like this:
+- Clone the repository
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+git clone https://github.com/jonathangomz/articles.git
+
+cd articles
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Install dependencies
+
+```bash
+npm install
+```
+
+- Run
+
+```bash
+npm start dev
+```
