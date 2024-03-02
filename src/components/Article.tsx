@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { instance as axios } from '../services/AxiosErrorHandler';
 import { AuthContext } from '../context/Auth.context';
 import { ArticleModel } from '../models/Article';
+import Navbar from './Navbar';
+import styled from 'styled-components';
 
 function Article() {
   const { user } = useContext(AuthContext);
@@ -31,13 +33,45 @@ function Article() {
   };
 
   return (
-      <div key={article?.id}>
-        <h2>{article?.title}</h2>
-        <p><strong>Author:</strong> {article?.author}</p>
-        <p><strong>Date:</strong> {article?.date}</p>
-        <p>{article?.content}</p>
-    </div>
+    <>
+      <Navbar
+        title={article?.title ?? ''}
+        buttonLink='/'
+        buttonText='Back'
+      />
+
+      <Container>
+        <div key={article?.id}>
+          <ArticleMetadata>
+            <p>By: {article?.author}</p>
+            <p>{article?.date}</p>
+          </ArticleMetadata>
+          <Content>
+            {article?.content}
+          </Content>
+        </div>
+      </Container>
+    </>
   );
 }
+
+const Content = styled.p`
+  text-align: justify;
+`
+
+const ArticleMetadata = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 10px 10px;
+  margin-top: 75px;
+`;
 
 export default Article
