@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import { Button, LinkButton } from '../styles/styled-components';
 import { useContext } from 'react';
+import styled from 'styled-components';
 import { AuthContext } from '../context/Auth.context';
+import { Button, LinkButton } from '../styles/styled-components';
 
-export default function Navbar({title, buttonLink, buttonText}: {
+const Navbar = ({title, buttonLink, buttonText}: {
   title: string,
   buttonLink: string,
   buttonText: string
-}) {
+}) => {
   const auth = useContext(AuthContext);
 
   return (
@@ -41,4 +41,6 @@ const NavbarLayout = styled.div`
 
 const Title = styled.h3`
   margin: 0;
-`
+`;
+
+export default Navbar;

@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import '../models/Article'
 
-export default function Spinner() {
+const Spinner = () => {
   return (
     <>
       <SpinnerSvg
@@ -16,13 +15,13 @@ export default function Spinner() {
   );
 }
 
-export const rotate = keyframes`
+const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
-export const dash = keyframes`
+const dash = keyframes`
   0% {
     stroke-dasharray: 1, 150;
     stroke-dashoffset: 0;
@@ -35,16 +34,18 @@ export const dash = keyframes`
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
   }
-`
+`;
 
-export const SpinnerSvg = styled.svg`
+const SpinnerSvg = styled.svg`
   animation: ${rotate} 2s linear infinite;
   width: 24px;
   height: 24px;
-`
+`;
 
-export const Circle = styled.circle`
+const Circle = styled.circle`
   stroke: #ffffff21;
   stroke-linecap: round;
   animation: ${dash} 1.5s ease-in-out infinite;
-`
+`;
+
+export default Spinner;

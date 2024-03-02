@@ -1,6 +1,23 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+const Modal = ({ isOpen, children }:{
+  isOpen: boolean;
+  children: ReactNode
+}) => {
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <ModalWrapper>
+      <ModalContent>
+        {children}
+      </ModalContent>
+    </ModalWrapper>
+  );
+};
+
 const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -18,22 +35,5 @@ const ModalContent = styled.div`
   padding: 20px;
   border-radius: 8px;
 `;
-
-const Modal = ({ isOpen, children }:{
-  isOpen: boolean;
-  children: ReactNode
-}) => {
-  if (!isOpen) {
-    return null;
-  }
-
-  return (
-    <ModalWrapper>
-      <ModalContent>
-        {children}
-      </ModalContent>
-    </ModalWrapper>
-  );
-};
 
 export default Modal;

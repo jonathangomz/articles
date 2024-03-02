@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import '../models/Article'
 import { useParams } from 'react-router-dom'
-import { instance as axios } from '../services/AxiosErrorHandler';
+import styled from 'styled-components';
 import { AuthContext } from '../context/Auth.context';
+import { instance as axios } from '../services/AxiosErrorHandler';
 import { ArticleModel } from '../models/Article';
 import Navbar from './Navbar';
-import styled from 'styled-components';
 
-function Article() {
+export default function Article() {
   const { user } = useContext(AuthContext);
   const { authorId, articleId } = useParams();
   const [article, setArticle] = useState<ArticleModel>();
@@ -17,19 +16,13 @@ function Article() {
   }, []);
 
   const fetchArticle = async (articleId: string | undefined) => {
-    try {
-      const {data} = await axios.get(`/articles/${authorId}/${articleId}`,{
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${user?.token}`
-        },
-      }); // Replace with your API endpoint
-      console.log('data', data);
-      setArticle(data);
-
-    } catch (error) {
-      console.error('Error fetching articles:', error);
-    }
+    const {data} = await axios.get(`/articles/${authorId}/${articleId}`,{
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${user?.token}`
+      },
+    });
+    setArticle(data);
   };
 
   return (
@@ -57,14 +50,14 @@ function Article() {
 
 const Content = styled.p`
   text-align: justify;
-`
+`;
 
 const ArticleMetadata = styled.div`
   display: flex;
   gap: 12px;
   width: 100%;
   justify-content: space-between;
-`
+`;
 
 const Container = styled.div`
   display: flex;
@@ -73,5 +66,3 @@ const Container = styled.div`
   margin: 10px 10px;
   margin-top: 75px;
 `;
-
-export default Article

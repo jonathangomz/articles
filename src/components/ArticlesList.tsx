@@ -1,41 +1,36 @@
-import '../models/Article'
 import { useState, useEffect, useContext } from 'react'
-import { ArticleModel } from '../models/Article'
-import { instance as axios } from '../services/AxiosErrorHandler'
-import { AuthContext } from '../context/Auth.context'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
+import styled from 'styled-components'
+import { AuthContext } from '../context/Auth.context'
+import { instance as axios } from '../services/AxiosErrorHandler'
+import { ArticleModel } from '../models/Article'
 import { FormInput } from '../styles/styled-components'
+import Navbar from './Navbar'
 
 export default function ArticlesList() {
   const { user } = useContext(AuthContext);
-  
   const [articles, setArticles] = useState<ArticleModel[]>([]);
   const [searchType, setSearchType] = useState('title');
   const [searchText, setSearchText] = useState('');
 
+  // Effect used to update the articles list on searchText update
   useEffect(() => {
     fetchArticles();
   }, [searchText]);
 
   const fetchArticles = async () => {
-    try {
-      // If have filter generate the query param
-      let query: string | undefined;
-      if(searchText) query = `?${searchType}=${searchText}`;
+    // If have filter generate the query param
+    let query: string | undefined;
+    if(searchText) query = `?${searchType}=${searchText}`;
 
-      const {data} = await axios.get(`/articles${(query ?? '')}`,{
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${user?.token}`
-        },
-      });
+    const {data} = await axios.get(`/articles${(query ?? '')}`,{
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${user?.token}`
+      },
+    });
 
-      setArticles(data);
-    } catch (error) {
-      console.error('Error fetching articles:', error);
-    }
+    setArticles(data);
   };
 
   return (
@@ -58,9 +53,9 @@ export default function ArticlesList() {
           <SelectSearchType
             onChange={(e) => setSearchType(e.target.value)}
           >
-            <option selected={searchType === 'author'} value="author">Author</option>
-            <option selected={searchType === 'title'} value="title">Title</option>
-            <option selected={searchType === 'content'} value="content">Content</option>
+            <option selected={searchType === 'author'} value='author'>Author</option>
+            <option selected={searchType === 'title'} value='title'>Title</option>
+            <option selected={searchType === 'content'} value='content'>Content</option>
           </SelectSearchType>
         </SearchSection>
 
@@ -83,17 +78,17 @@ const SearchSection = styled.div`
   display: flex;
   gap: 12px;
   width: 100%;
-`
+`;
 
 const SelectSearchType = styled.select`
   border: 1px solid #ffffff21;
   border-radius: 8px;
   padding: 5px;
-`
+`;
 
 const SearchText = styled(FormInput)`
   width: 100%;
-`
+`;
 
 const Container = styled.div`
   display: flex;
