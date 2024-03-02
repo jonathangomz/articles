@@ -38,7 +38,7 @@ export default function ArticlesList() {
       <Navbar
         title='Articles'
         buttonLink='/article'
-        buttonText='Create a new Article'
+        buttonText='New Article'
       />
 
       <Container>
@@ -52,10 +52,11 @@ export default function ArticlesList() {
 
           <SelectSearchType
             onChange={(e) => setSearchType(e.target.value)}
+            defaultValue={searchType}
           >
-            <option selected={searchType === 'author'} value='author'>Author</option>
-            <option selected={searchType === 'title'} value='title'>Title</option>
-            <option selected={searchType === 'content'} value='content'>Content</option>
+            <option value='author'>Author</option>
+            <option value='title'>Title</option>
+            <option value='content'>Content</option>
           </SelectSearchType>
         </SearchSection>
 
@@ -63,8 +64,8 @@ export default function ArticlesList() {
           <ArticleContainer key={article.id} to={`article/${article.author}/${article.id}`}>
             <ArticleTitle>{article.title}</ArticleTitle>
             <ArticleMetadata>
-              <ArticleAuthor>By: {article.author}</ArticleAuthor>
-              <ArticleDate>{article.date}</ArticleDate>
+              <Metadata>By: {article.author}</Metadata>
+              <Metadata>{article.date}</Metadata>
             </ArticleMetadata>
             <ArticleContent>{article.content.substring(0, 70)}{article.content.length > 70 ? '...':''}</ArticleContent>
           </ArticleContainer>
@@ -99,14 +100,14 @@ const Container = styled.div`
 `;
 
 const ArticleContainer = styled(Link)`
-  background-color: #f9f9f9;
+  color: ${props => props.theme.text_color_contrast};
+  background-color: ${props => props.theme.bg_contrast};;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
 `;
 
 const ArticleTitle = styled.h2`
-  color: #333;
   font-size: 1.5rem;
   margin: 0;
   margin-bottom: 8px;
@@ -117,20 +118,12 @@ const ArticleMetadata = styled.div`
   justify-content: space-between;
 `;
 
-const ArticleAuthor = styled.p`
-  color: #666;
-  font-size: 1rem;
-  margin: 0;
-`;
-
-const ArticleDate = styled.p`
-  color: #666;
-  font-size: 0.9rem;
+const Metadata = styled.p`
+  font-size: 0.8rem;
   margin: 0;
 `;
 
 const ArticleContent = styled.p`
-  color: #333;
   font-size: 1rem;
   margin-top: 16px;
 `;

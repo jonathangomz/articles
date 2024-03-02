@@ -26,8 +26,8 @@ const NavbarContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #333;
-  color: #fff;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text_color};
   z-index: 999;
 `;
 

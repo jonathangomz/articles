@@ -9,7 +9,7 @@ export const CenterContainer = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #131A22;
+  background-color: ${props => props.theme.bg};
 `
 
 export const Form = styled.form<{max_width?: string}>`
@@ -38,6 +38,7 @@ export const FormButton = styled.button<{ is_loading: boolean }>`
   border: 1px solid #ffffff21;
   margin-top: 10px;
   width: 100%;
+  background-color: ${props => props.theme.green};
   &:hover {
     cursor: ${({ is_loading }) => is_loading ? 'wait' : 'pointer'};
   }
@@ -60,20 +61,15 @@ export const Button = styled.div<{type?: 'danger'}>`
   }
 `
 
-export const LinkButton = styled(Link)<{type?: 'danger'}>`
+export const LinkButton = styled(Link)`
+  color: ${props => props.theme.text_color};
   border: 1px solid #ffffff21;
   border-radius: 8px;
-  background-color: ${({type}) => {
-    if(type === 'danger') {
-      return 'red';
-    } else {
-      return 'blue'
-    }
-  }};
+  background-color: ${props => props.theme.fg};
   padding: 5px 10px;
   width: fit-content;
   &:hover {
-    cursor: pointer;
+    opacity: 75%;
   }
 `
 

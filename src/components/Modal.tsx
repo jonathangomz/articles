@@ -24,14 +24,15 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props => props.theme.bg};
+  opacity: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: ${props => props.theme.bg_contrast};
   padding: 20px;
   border-radius: 8px;
 `;
