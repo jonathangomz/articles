@@ -1,12 +1,13 @@
 import { FormEvent, useContext, useState } from 'react';
+import { Form, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Auth.context';
 import { instance as axios } from '../services/AxiosErrorHandler';
 import Spinner from './Spinner';
 import { CenterContainer, FormButton, FormInput, FormItem } from '../styles/styled-components';
-import { Form } from 'react-router-dom';
 
 export default function Login() {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,11 @@ export default function Login() {
     e.preventDefault();
     
     const { data } = await axios.post(`/auth/login`, { username, password });
-    auth?.login({ username, token: data.access_token  });
+
+    if(data && data.access_token) {
+      auth.login({ username, token: data.access_token  });
+      navigate('/');
+    }
 
     setIsLoading(false);
   };

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../context/Auth.context';
 import { Button, LinkButton } from '../styles/styled-components';
+import ProtectedRoute from './ProtectedRoute';
 
 const Navbar = ({title, buttonLink, buttonText}: {
   title: string,
@@ -13,7 +14,9 @@ const Navbar = ({title, buttonLink, buttonText}: {
   return (
     <NavbarContainer>
       <NavbarLayout>
-        <LinkButton to={buttonLink}>{buttonText}</LinkButton>
+        <ProtectedRoute>
+          <LinkButton to={buttonLink}>{buttonText}</LinkButton>
+        </ProtectedRoute>
         <Title>{title}</Title>
         <Button type='danger' onClick={auth.logout}>Logout</Button>
       </NavbarLayout>

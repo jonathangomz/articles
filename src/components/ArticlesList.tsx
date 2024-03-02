@@ -6,6 +6,7 @@ import { instance as axios } from '../services/AxiosErrorHandler'
 import { ArticleModel } from '../models/Article'
 import { FormInput } from '../styles/styled-components'
 import Navbar from './Navbar'
+import ProtectedRoute from './ProtectedRoute'
 
 export default function ArticlesList() {
   const { user } = useContext(AuthContext);
@@ -61,14 +62,16 @@ export default function ArticlesList() {
         </SearchSection>
 
         {articles.map((article: ArticleModel) => (
-          <ArticleContainer key={article.id} to={`article/${article.author}/${article.id}`}>
-            <ArticleTitle>{article.title}</ArticleTitle>
-            <ArticleMetadata>
-              <Metadata>By: {article.author}</Metadata>
-              <Metadata>{article.date}</Metadata>
-            </ArticleMetadata>
-            <ArticleContent>{article.content.substring(0, 70)}{article.content.length > 70 ? '...':''}</ArticleContent>
-          </ArticleContainer>
+          <ProtectedRoute>
+            <ArticleContainer key={article.id} to={`article/${article.author}/${article.id}`}>
+              <ArticleTitle>{article.title}</ArticleTitle>
+              <ArticleMetadata>
+                <Metadata>By: {article.author}</Metadata>
+                <Metadata>{article.date}</Metadata>
+              </ArticleMetadata>
+              <ArticleContent>{article.content.substring(0, 70)}{article.content.length > 70 ? '...':''}</ArticleContent>
+            </ArticleContainer>
+          </ProtectedRoute>
         ))}
       </Container>
     </>
