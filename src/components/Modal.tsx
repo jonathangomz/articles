@@ -25,7 +25,7 @@ const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${props => props.theme.bg};
-  opacity: 50%;
+  opacity: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
