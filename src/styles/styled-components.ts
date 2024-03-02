@@ -35,6 +35,7 @@ export const FormInput = styled.input`
 `
 
 export const FormButton = styled.button<{ is_loading: boolean }>`
+  color: ${props => props.theme.text_color};
   border: 1px solid #ffffff21;
   margin-top: 10px;
   width: 100%;
