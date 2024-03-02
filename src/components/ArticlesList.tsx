@@ -17,7 +17,7 @@ export default function ArticlesList() {
   // Effect used to update the articles list on searchText update
   useEffect(() => {
     fetchArticles();
-  }, [searchText]);
+  }, [searchText, searchType]);
 
   const fetchArticles = async () => {
     // If have filter generate the query param
