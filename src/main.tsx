@@ -9,6 +9,7 @@ import AddArticle from './components/AddArticle';
 import Login from './components/Login.tsx';
 import { AuthProvider } from './context/Auth.context.tsx';
 import Article from './components/Article.tsx';
+import SignUp from './components/SignUp.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login/>,
+  },
+  {
+    path: "signup",
+    element: <SignUp/>,
   },
   {
     path: "article",

@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Auth.context';
 import { instance as axios } from '../services/AxiosErrorHandler';
 import Spinner from './Spinner';
@@ -52,6 +52,7 @@ export default function Login() {
           {isLoading ? (<Spinner />) : ('Login')}
         </FormButton>
       </Form>
+      <Link to='/signup'>Or sign up</Link>
     </CenterContainer>
   );
 };
